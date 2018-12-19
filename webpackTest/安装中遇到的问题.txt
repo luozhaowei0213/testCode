@@ -1,0 +1,3 @@
+webpack非命令 --> 全局安装
+webpack-dev-server  xxx webpack-cli  xxx ---> 版本不兼容 回退
+css not module 提示安装loader ---> 引用的地方 'style-loader!css-loader!./src/index.css'  || 配置 module rules{ test use}
