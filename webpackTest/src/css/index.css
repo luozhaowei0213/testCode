@@ -8,4 +8,9 @@ html{
     background: url(../images/47.jpg) no-repeat;
     width: 100px;
     height: 100px; 
+    transform: rotate(45deg);
+    box-shadow:2px 2px 2px #000;
+}
+::placeholder {
+    color : #f00
 }
