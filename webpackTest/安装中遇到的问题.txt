@@ -1,4 +1,10 @@
-webpack·ÇÃüÁî --> È«¾Ö°²×°
-webpack-dev-server  xxx webpack-cli  xxx ---> °æ±¾²»¼æÈİ »ØÍË
-css not module ÌáÊ¾°²×°loader ---> ÒıÓÃµÄµØ·½ 'style-loader!css-loader!./src/index.css'  || ÅäÖÃ module rules{ test use}
-file-loader °æ±¾2.0.0
+webpackéå‘½ä»¤ --> å…¨å±€å®‰è£…
+
+webpack-dev-server  xxx webpack-cli  xxx ---> ç‰ˆæœ¬ä¸å…¼å®¹ å›é€€
+
+css not module æç¤ºå®‰è£…loader ---> å¼•ç”¨çš„åœ°æ–¹ 'style-loader!css-loader!./src/index.css'  || é…ç½® module rules{ test use}
+
+file-loader ç‰ˆæœ¬2.0.0
+
+node-sasså®‰è£…å¤±è´¥ï¼šå¸è½½ç”¨ä¸‹é¢å‘½ä»¤é‡æ–°å®‰è£…
+npm i node-sass --sass_binary_site=https://npm.taobao.org/mirrors/node-sass/

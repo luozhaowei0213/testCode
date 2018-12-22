@@ -38,12 +38,17 @@ module.exports = {
             
             //css-loader: 加载.css文件
             //style-loader:使用<style>将css-loader内部样式注入到我们的HTML页面
+            /*
+                css3自动添加前缀
+                需要安装postcss-loader && autoprefixer(postcss-loader的插件，主要作用添加前缀,在postcss配置文件用引用)
+                需要配置文件 postcss.config.js 并在 webpack配置用引用postcss-loader
+            */
             {
                 test : /\.css$/,//找到css文件
                 //分离
                 use : extractTextPlugin.extract({
                     fallback : "style-loader",
-                    use : "css-loader"
+                    use : ["css-loader","postcss-loader"]
                 })
             },
             {
@@ -67,12 +72,20 @@ module.exports = {
                 use :['html-withimg-loader']
             },
             {
-                //编译less
+                //编译less  安装less&less-loader
                 test : /\.less/,
                 //use : ['style-loader','css-loader','less-loader']
                 //分离
                 use : extractTextPlugin.extract({
                     use : ['css-loader','less-loader'],
+                    fallback : 'style-loader'
+                })
+            },
+            {
+                //编译sass 安装node-sass sass-loader
+                test : /\.scss/,
+                use : extractTextPlugin.extract({
+                    use : ['css-loader','sass-loader'],
                     fallback : 'style-loader'
                 })
             }
