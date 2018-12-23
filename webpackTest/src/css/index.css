@@ -11,6 +11,9 @@ html{
     transform: rotate(45deg);
     box-shadow:2px 2px 2px #000;
 }
+#purifyCss{
+    background: #f00;
+}
 ::placeholder {
     color : #f00
 }

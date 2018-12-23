@@ -1,10 +1,15 @@
 const path = require('path');
+const glob = require('glob');
 //js压缩插件
 const uglify = require('uglifyjs-webpack-plugin');
 //压缩html--需安装
 const htmlPlugin = require('html-webpack-plugin');
 //css分离插件--需安装
 const extractTextPlugin = require('extract-text-webpack-plugin');
+//消除无用css插件
+//需安装 purifycss-webpack & purify-css
+const purifyCssPlugin = require('purifycss-webpack');
+
 
 //公共配置
 let webpackSite = {
@@ -52,7 +57,6 @@ module.exports = {
                 })
             },
             {
-                
                 //file-loader[解决src dist 打包后目录不同的问题]
                 //url-loader[配置图片小于limit值改base64]
                 test : /\.(png|jpg|jpeg|gif)$/,
@@ -107,7 +111,12 @@ module.exports = {
             template : './src/index.html'//模版
         }),
         //分离css 配置css路径
-        new extractTextPlugin('css/index.css')
+        new extractTextPlugin('css/index.css'),
+        //去除无用css
+        new purifyCssPlugin({
+            //目录下匹配文件node语法
+            paths : glob.sync(path.join(__dirname,'src/*.html'))
+        })
     ],
 
     //webpack开发服务 热更新 webpack-dev-server
