@@ -9,14 +9,31 @@ const extractTextPlugin = require('extract-text-webpack-plugin');
 //消除无用css插件
 //需安装 purifycss-webpack & purify-css
 const purifyCssPlugin = require('purifycss-webpack');
-
-
-//公共配置
-let webpackSite = {
-    publicPath : 'http://192.168.100.6:1717/'
+//命令行传值打包开发、生产环境
+//console.log(process.env)
+if(process.env.type == "build"){
+    //公共配置
+    var webpackSite = {
+        //静态资源路径
+        publicPath : 'http://img.img.9xiu.com/'
+    }
+}else{
+    var webpackSite = {
+        publicPath : 'http://192.168.100.6:1717/'
+    }
 }
 
+
+
 module.exports = {
+
+    //打包调试
+    //source-map 打包最慢，生成独立map文件，生成错误 行 列
+    //cheap-moudle-source-map 独立map文件，生成错误 行 没有列
+    //eval-source-map  打包快 没有独立文件，影响性能，开发阶段用，上线前重新打包 生成错误 行 列
+    //cheap-moudle-eval-source-map  生成错误 列 没有行
+    devtool : 'eval-source-map',
+
     //入口
     entry : {
         common : './src/entry.js',
@@ -92,6 +109,16 @@ module.exports = {
                     use : ['css-loader','sass-loader'],
                     fallback : 'style-loader'
                 })
+            },
+            {
+                //babel编译ES6 jsx--react文件 渲染器使用.babelrc配置
+                //babel-core babel-loader babel-preset-env 
+                //babel-preset-react //编译react的包
+                test: /\.(jsx|js)$/,
+                use:{
+                    loader : 'babel-loader'
+                },
+                exclude : /node_modules/
             }
         ]
     },
