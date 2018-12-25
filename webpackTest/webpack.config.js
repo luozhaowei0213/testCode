@@ -17,7 +17,12 @@ module.exports = {
         rules : [
             {
                 test : /\.css$/,//找到css文件
+
+                //三种写法
                 use : ['style-loader','css-loader']//使用哪些loader
+                //loader : ['style-loader','css-loader']//使用哪些loader
+                //use : [ { loader : 'style-loader' } , { loader : 'css-loader' }  ]
+                
                 //include : ,//需要配置哪些文件，文件夹，扩展名 需要处理
                 //exclude :,//哪些不需要处理
                 //query : //额外配置项 可选
