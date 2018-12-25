@@ -1,3 +1,27 @@
-webpack������ --> ȫ�ְ�װ
-webpack-dev-server  xxx webpack-cli  xxx ---> �汾������ ����
-css not module ��ʾ��װloader ---> ���õĵط� 'style-loader!css-loader!./src/index.css'  || ���� module rules{ test use}
+webpack非命令 --> 全局安装
+
+npm install --save xxx 下载安装到本地 生产环境
+npm install xxx  全局安装
+npm install --save-dev xxx 开发环境安装
+npm install 根据配置文件安装依赖包
+npm install --production 根据配置文件安装生产环境包
+
+webpack-dev-server  xxx webpack-cli  xxx ---> 版本不兼容 回退
+
+css not module 提示安装loader ---> 引用的地方 'style-loader!css-loader!./src/index.css'  || 配置 module rules{ test use}
+
+file-loader 版本2.0.0
+
+node-sass安装失败：卸载用下面命令重新安装
+npm i node-sass --sass_binary_site=https://npm.taobao.org/mirrors/node-sass/
+
+"babel-core"@6 需要搭配"babel-loader"@7  最新的8会失败
+"babel-core": "^6.26.3",
+"babel-loader": "^7.1.5" 
+
+传值命令
+"dev" : "set type=dev&webpack",
+"build" : "set type=build&webpack"
+mac使用
+"dev" : "export type=dev&&webpack",
+"build" : "export type=build&&webpack"
