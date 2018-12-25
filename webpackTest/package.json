@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "server": "webpack-dev-server --open",
-    "dev" : "set type=dev&webpack",
-    "build" : "set type=build&webpack"
+    "dev": "set type=dev&webpack --watch",
+    "build": "set type=build&webpack"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +34,8 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
-    "node-sass": "^4.11.0"
+    "jquery": "^3.3.1",
+    "node-sass": "^4.11.0",
+    "vue": "^2.5.21"
   }
 }

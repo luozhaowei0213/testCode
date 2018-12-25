@@ -1,4 +1,4 @@
-webpack非命令 --> 全局安装
+﻿webpack非命令 --> 全局安装
 
 npm install --save xxx 下载安装到本地 生产环境
 npm install xxx  全局安装
@@ -25,3 +25,17 @@ npm i node-sass --sass_binary_site=https://npm.taobao.org/mirrors/node-sass/
 mac使用
 "dev" : "export type=dev&&webpack",
 "build" : "export type=build&&webpack"
+
+
+npm install --save vue 后配置 
+new webpack.ProvidePlugin({
+            $ : 'jquery',
+            vue : 'vue'
+        }),
+报错 Uncaught TypeError: vue is not a constructor
+解决： 添加配置 
+ resolve: {
+        alias: {
+            'vue': 'vue/dist/vue.js'//改变包指向
+        }
+    },

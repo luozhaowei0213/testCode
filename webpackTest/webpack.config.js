@@ -9,6 +9,12 @@ const extractTextPlugin = require('extract-text-webpack-plugin');
 //消除无用css插件
 //需安装 purifycss-webpack & purify-css
 const purifyCssPlugin = require('purifycss-webpack');
+//安装公共插件(jquery) webpack自带插件 ProvidePlugin
+const webpack = require('webpack');
+
+
+
+
 //命令行传值打包开发、生产环境
 //console.log(process.env)
 if(process.env.type == "build"){
@@ -32,11 +38,14 @@ module.exports = {
     //cheap-moudle-source-map 独立map文件，生成错误 行 没有列
     //eval-source-map  打包快 没有独立文件，影响性能，开发阶段用，上线前重新打包 生成错误 行 列
     //cheap-moudle-eval-source-map  生成错误 列 没有行
-    devtool : 'eval-source-map',
+    
+    //devtool : 'eval-source-map',
 
     //入口
     entry : {
-        common : './src/entry.js',
+        "common" : './src/entry.js',
+        "jquery-module" : 'jquery', //引用jquery包
+        "vue-module" : "vue" //引用vue包
        // index : './src/entry2.js'
     },
     //出口
@@ -128,6 +137,21 @@ module.exports = {
         //js压缩
         //new uglify(),
 
+        //优化 抽离jquery文件
+        new webpack.optimize.CommonsChunkPlugin({
+            name : ["jquery-module","vue-module"], // 对应entry模块名
+            filename : "assets/[name].js",//抽离目录 [name取上面name，ext扩展名]
+            minChunks : 2 //最小抽离文件数
+        }),
+
+        //引入公用插件
+        new webpack.ProvidePlugin({
+            $ : 'jquery',
+            vue : 'vue'
+        }),
+        //版权，打包文件开头加入文案
+        new webpack.BannerPlugin("这个文件是我配置的，是第一行"),
+        
         //压缩html
         new htmlPlugin({
             //html压缩相关配置
@@ -145,6 +169,11 @@ module.exports = {
             paths : glob.sync(path.join(__dirname,'src/*.html'))
         })
     ],
+    resolve: {
+        alias: {
+            'vue': 'vue/dist/vue.js'//改变包指向
+        }
+    },
 
     //webpack开发服务 热更新 webpack-dev-server
     devServer : {
@@ -152,5 +181,11 @@ module.exports = {
         host : '192.168.100.6',//ip localhost
         compress : true,//服务器压缩
         port : 1717 //端口
+    },
+    //自动打包配置
+    watchOptions:{
+        poll : 1000,//监测时间毫秒
+        aggregeateTimeout : 500,//延迟打包，500秒内多次保存只打包一次
+        ignored : /node_moudles/ //不打包
     }
 }
